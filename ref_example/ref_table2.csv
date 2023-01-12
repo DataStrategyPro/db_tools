@@ -1,0 +1,12 @@
+table_name,manufacturer,cyl,class_is_null,drv_is_null
+mpg_na,audi,4,IS_NULL,NOT_NULL
+mpg_na,audi,6,IS_NULL,NOT_NULL
+mpg_na,chevrolet,4,IS_NULL,NOT_NULL
+mpg_na,chevrolet,6,IS_NULL,NOT_NULL
+mpg_na,chevrolet,8,IS_NULL,IS_NULL
+mpg_na,dodge,4,IS_NULL,IS_NULL
+mpg_na,dodge,6,IS_NULL,IS_NULL
+mpg_na,dodge,8,IS_NULL,IS_NULL
+mpg_na,Other,6,NOT_NULL,IS_NULL
+mpg_na,Other,8,NOT_NULL,IS_NULL
+mpg_na,Other,4,NOT_NULL,IS_NULL
