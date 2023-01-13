@@ -18,7 +18,7 @@ ref_to_sql <- function(df){
     v <- unique(df[column])
     valid_values <- str_c("'",str_c(v,collapse = "','"),"'")
     sql <- glue("{sql} 
-              IIF({str_sub(column,end = -9)} IS NULL,'IS_NULL','NOT_NULL') AS {column},")
+              CASE WHEN({str_sub(column,end = -9)} IS NULL) THEN 'IS_NULL' ELSE 'NOT_NULL' END AS {column},")
   }
   sql <- str_sub(sql,end = -2)
   sql <- glue("{sql}
@@ -52,6 +52,8 @@ ref_to_sql <- function(df){
 }
 
 compare_to_ref <- function(df_main,df_ref,compare_cols,...){
+  names(df_main) <- tolower(names(df_main))
+  names(df_ref) <- tolower(names(df_ref))
   df <- df_main %>% 
     mutate(.merge.x = 1) %>% 
     full_join(df_ref %>% mutate(.merge.y = 1),...) %>%
