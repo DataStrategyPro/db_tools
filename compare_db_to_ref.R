@@ -8,7 +8,7 @@ ref_to_sql <- function(df){
   names(df) <- tolower(names(df))
   table_name <- df %>% head(1) %>% pull(table_name)
   null_cols <- df %>% select(contains("_is_null")) %>% names()
-  cols <- df %>% select(-table_name) %>% names()
+  cols <- df %>% select(-any_of(c('table_name','note','notes'))) %>% names()
   
   sql <- glue("with q1 as (
               Select *,")

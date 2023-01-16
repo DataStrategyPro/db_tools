@@ -33,6 +33,26 @@ tdf %>%
   mutate_at(vars(matches("d")),~case_when(. %in%  (allowable_values) ~ ., TRUE ~ 'Other')) %>% 
   sql_render()
 
+
+ref <- mpg %>% 
+  group_by(manufacturer,model) %>%
+  summarise(cty = sum(cty), n=n()) 
+  
+ref %>% select_if(is.character)
+
+tdf %>% right_join(ref,copy = TRUE) %>% 
+  sql_render()
+
+
+tdf %>% select(any_of(c('asdf','model'))) %>% 
+  sql_render()
+
+
+ref <- read_csv('ref_example/ref_table2.csv')
+ref
+
+tdf %>% filter()
+
 # Run the tests
 tests_run('ref_example/',con)
 tests_summarise(glue("test_results/{lubridate::today()}/"))
