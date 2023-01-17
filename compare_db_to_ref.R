@@ -57,7 +57,7 @@ compare_to_ref <- function(df_main,df_ref,compare_cols,...){
   df <- df_main %>% 
     mutate(.merge.x = 1) %>% 
     full_join(df_ref %>% mutate(.merge.y = 1),...) %>%
-    mutate(Result = ifelse(is.na(.merge.x),'Fail', ifelse(is.na(.merge.y), 'Warning','Pass'))) %>%
+    mutate(Result = ifelse(is.na(.merge.x),'Warning', ifelse(is.na(.merge.y), 'Fail','Pass'))) %>%
     mutate(Result_Detail = ifelse(is.na(.merge.x),'Not in data', ifelse(is.na(.merge.y), 'Not in reference file','Pass'))) %>%
     replace_na(list(n=1)) %>% 
     mutate(Pct = n / sum(n)) %>% 
