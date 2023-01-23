@@ -21,4 +21,10 @@ class Comparison:
 
     self.df1_detail = pd.merge(df1,self.results,on=join_on,how='outer')
     self.df2_detail = pd.merge(df2,self.results,on=join_on,how='outer')
+    
+  def get_df1_detail_summary(self,n=1):
+    return self.df1_detail.groupby('Result').head(n)
+
+  def get_df2_detail_summary(self,n=1):
+    return self.df2_detail.groupby('Result').head(n)
 
